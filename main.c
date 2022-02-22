@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <unistd.h>
 
 #define FILENAME ".todo"
 #define MAX_LINE_LENGTH 60
@@ -12,20 +13,21 @@ void add_todo(const char* filename, char* line, int lim);
 
 int main(int argc, char* argv[]){
  	
-	//Look into getops for parsing input args
+	int option;
+	int i;
 
 
-	if(todo_exists(FILENAME)){
-		print_todo_list(FILENAME,MAX_LINE_LENGTH);
+	while((option = getopt(argc,argv,"a")) != -1){
+		
+		switch(option){
+		case 'a':
+			add_todo(FILENAME,argv[2],MAX_LINE_LENGTH);
+			break;
+		}
 	}
-	else{
-		printf("Todo file doesn't exist. Creating....\n");
-		create_todo_list(FILENAME);
-	}	
 
-
+	print_todo_list(FILENAME,MAX_LINE_LENGTH);
 	
-
 
 	return 0;
 }
@@ -55,11 +57,6 @@ void create_todo_list(const char* filename){
 
 void print_todo_list(const char* filename,int lim){
 
-	/*
-	1. Open File
-	2. If file is blank (ie: no todos) print message
-	3. Else print the todo list to stdout
-	*/
 	FILE *fp;
 	char line[lim];
 	int c;
@@ -89,6 +86,8 @@ void add_todo(const char* filename, char* line, int lim){
 
 	fp = fopen(filename,"a");
 	fputs(line,fp);
+	fputs("\n",fp);
+
 
 	fclose(fp);
 
