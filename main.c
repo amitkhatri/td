@@ -16,6 +16,11 @@ int main(int argc, char* argv[]){
 	int option;
 	int i;
 
+	if(argc == 1){
+		print_todo_list(FILENAME,MAX_LINE_LENGTH);
+		return 0;
+	}
+
 
 	while((option = getopt(argc,argv,"a")) != -1){
 		
@@ -26,7 +31,6 @@ int main(int argc, char* argv[]){
 		}
 	}
 
-	print_todo_list(FILENAME,MAX_LINE_LENGTH);
 	
 
 	return 0;
@@ -95,8 +99,9 @@ void add_todo(const char* filename, char* line, int lim){
 	fputs(line,fp);
 	fputs("\n",fp);
 
-
 	fclose(fp);
+
+	printf("\"%s\" sucessfully added to todos\n",line);
 
 	return;
 
