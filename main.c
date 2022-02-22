@@ -68,6 +68,13 @@ void print_todo_list(const char* filename,int lim){
 		printf("NO TODOS \n");
 		return;
 	}
+	
+	/* fgetc advances the buffer one character. ungetc will
+	   set the buffer back one character.
+
+	   Without ungetc(c,fp), fgets will miss the first
+	   character from the file stream
+	*/
 
 	ungetc(c,fp);
 
