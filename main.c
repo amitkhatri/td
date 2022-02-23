@@ -11,9 +11,16 @@
 int main(int argc, char* argv[]){
 
  	struct td_node *td = NULL;
-	td = (struct td_node*)malloc(sizeof(struct td_node));
 
-	todo_init(td,FILENAME,MAX_LINE_LENGTH);
+	//todo_init(td,FILENAME,MAX_LINE_LENGTH);
+	
+	todo_add(&td,"DAMMIT");
+	todo_add(&td,"JACK");
+	todo_add(&td,"WTF!");
+
+	print_linked_list(td);
+
+	free(td);
 	/*int option;
 	int i;
 

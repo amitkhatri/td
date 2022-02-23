@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
-
+#include <stdlib.h>
 #include "td.h"
 bool todo_exists(const char* filename){
 
@@ -106,3 +106,37 @@ void todo_init(struct td_node* head, const char* filename, int lim){
 	fclose(fp);
 }
 
+void todo_add(struct td_node** head, char* str){
+	struct td_node *new_node = malloc(sizeof(struct td_node));
+	new_node -> data = str;
+	new_node -> next = NULL;
+
+
+	if(*head == NULL)
+		*head = new_node;
+	else{
+		
+		struct td_node *cursor = *head;
+
+		while(cursor -> next != NULL)
+			cursor = cursor -> next;
+
+		cursor -> next = new_node;
+	}
+		
+	return;
+	
+	
+	
+		
+}
+
+void print_linked_list(struct td_node* head){
+	
+	struct td_node* cursor = head;
+
+	while(cursor != NULL){
+		printf("%s\n",cursor -> data);
+		cursor = cursor -> next;
+	}
+}
