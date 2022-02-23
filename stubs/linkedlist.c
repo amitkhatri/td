@@ -37,5 +37,9 @@ int main(void){
 		n = n -> next;
 	}
 
+	free(head);
+	free(second);
+	free(third);
+
 	return 0;
 }

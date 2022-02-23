@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
+
+#include "td.h"
 bool todo_exists(const char* filename){
 
 	FILE *fp;
@@ -71,3 +73,36 @@ void add_todo(const char* filename, char* line, int lim){
 
 
 }
+
+void todo_init(struct td_node* head, const char* filename, int lim){
+	
+	FILE *fp;
+	char line[lim];
+	int c;
+
+	fp = fopen(filename,"r");
+	c = fgetc(fp);
+
+	if(c == EOF){
+		return;
+	}
+
+
+	/* fgetc advances the buffer one character. ungetc will
+	   set the buffer back one character.
+
+	   Without ungetc(c,fp), fgets will miss the first
+	   character from the file stream
+	*/
+
+	ungetc(c,fp);
+
+
+	while(fgets(line,lim,fp) != NULL)
+		//Add each todo to the linked list
+		printf("%s",line);
+	
+
+	fclose(fp);
+}
+
