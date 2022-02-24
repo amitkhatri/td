@@ -2,44 +2,36 @@
 #include <stdbool.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "td.h"
 
 #define FILENAME ".todo"
-#define MAX_LINE_LENGTH 30
+#define MAX_LINE_LENGTH 50
 
 int main(int argc, char* argv[]){
 
- 	struct td_node *td = NULL;
-
-	//todo_init(td,FILENAME,MAX_LINE_LENGTH);
-	
-	todo_add(&td,"DAMMIT");
-	todo_add(&td,"JACK");
-	todo_add(&td,"WTF!");
-
-	print_linked_list(td);
-
-	free(td);
-	/*int option;
+	int option;
 	int i;
+	struct td_node *td = NULL;
 
-	if(argc == 1){
-		print_todo_list(FILENAME,MAX_LINE_LENGTH);
-		return 0;
-	}
+	todo_init(&td,FILENAME,MAX_LINE_LENGTH);
 
-
-	while((option = getopt(argc,argv,"a")) != -1){
-		
-		switch(option){
-		case 'a':
-			add_todo(FILENAME,argv[2],MAX_LINE_LENGTH);
-			break;
-		}
+	if(argc == 1)
+		print_todo(&td);
 	
+	/*if(argc == 1){
+	}else{
 
-*/	
+			while((option = getopt(argc,argv,"a")) != -1){
+		
+			switch(option){
+			case 'a':
+				printf("-a flag!\n");
+				break;
+			}*/
+	
+	
 
 	return 0;
 }
