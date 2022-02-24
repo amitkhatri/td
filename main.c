@@ -32,6 +32,6 @@ int main(int argc, char* argv[]){
 			}*/
 	
 	
-
+	todo_free(td);
 	return 0;
 }
