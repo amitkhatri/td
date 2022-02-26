@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "td.h"
-void todo_init(struct td_node** head, const char* filename, int lim){
+void todo_init(struct td_node **head, const char *filename, int lim){
 	
-	FILE* fp;
+	FILE *fp;
 	char line[lim];
 
 	fp = fopen(filename,"r");
@@ -19,7 +19,7 @@ void todo_init(struct td_node** head, const char* filename, int lim){
 	return;
 }	
 
-void todo_add(struct td_node** head, char* str){
+void todo_add(struct td_node **head, char *str){
 
 	struct td_node *new_node = malloc(sizeof(struct td_node));
 	
@@ -33,8 +33,9 @@ void todo_add(struct td_node** head, char* str){
 		
 		struct td_node *cursor = *head;
 
-		while(cursor -> next != NULL)
+		while(cursor -> next != NULL){
 			cursor = cursor -> next;
+		}
 
 		cursor -> next = new_node;
 	}
@@ -42,10 +43,10 @@ void todo_add(struct td_node** head, char* str){
 	return;		
 }
 
-void todo_delete(struct td_node** head, int entry){
+void todo_delete(struct td_node **head, int entry){
 	int i = 1;
-	struct td_node* temp = *head;
-	struct td_node* prev;
+	struct td_node *temp = *head;
+	struct td_node *prev;
 
 	if(entry == 1){
 		*head = temp -> next;
@@ -71,9 +72,9 @@ void todo_delete(struct td_node** head, int entry){
 
 }
 
-void todo_write(struct td_node** head, const char* filename){
+void todo_write(struct td_node **head, const char *filename){
 	FILE *fp;
-	struct td_node* cursor = *head;
+	struct td_node *cursor = *head;
 
 	fp = fopen(filename,"w+");
 
@@ -89,14 +90,14 @@ void todo_write(struct td_node** head, const char* filename){
 
 }
 
-void todo_print(struct td_node** head){
+void todo_print(struct td_node **head){
 	
 	if(*head == NULL){
 		printf("No Todos.\n");
 		return;
 	}
 	
-	struct td_node* cursor = *head;
+	struct td_node *cursor = *head;
 
 	while(cursor != NULL){
 		printf("%s\n",cursor -> data);
@@ -104,9 +105,9 @@ void todo_print(struct td_node** head){
 	}
 }
 
-void todo_free(struct td_node* head){
+void todo_free(struct td_node *head){
 	while(head != NULL){
-		struct td_node* temp = head;
+		struct td_node *temp = head;
 		head = head -> next;
 		free(temp -> data);
 		free(temp);

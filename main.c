@@ -13,7 +13,7 @@ int main(int argc, char* argv[]){
 
 	int option;
 	struct td_node *td = NULL;
-	char** ptr;
+	char **ptr;
 
 	todo_init(&td,FILENAME,MAX_LINE_LENGTH);
 
