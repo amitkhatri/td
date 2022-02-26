@@ -12,26 +12,32 @@
 int main(int argc, char* argv[]){
 
 	int option;
-	int i;
 	struct td_node *td = NULL;
+	char** ptr;
 
 	todo_init(&td,FILENAME,MAX_LINE_LENGTH);
 
-	if(argc == 1)
-		print_todo(&td);
-	
-	/*if(argc == 1){
-	}else{
-
-			while((option = getopt(argc,argv,"a")) != -1){
-		
+	if(argc == 1){
+		todo_print(&td);
+	}
+	else{
+		while((option = getopt(argc,argv,"ad")) != -1){
 			switch(option){
-			case 'a':
-				printf("-a flag!\n");
-				break;
-			}*/
-	
+				case 'a':
+					todo_add(&td,argv[2]);
+					break;
+				case 'd':
+					todo_delete(&td,strtol(argv[2],ptr,10));
+					break;
+			}
+		}
+	}
+
+
+	todo_write(&td,FILENAME);
+
 	
 	todo_free(td);
+	
 	return 0;
 }

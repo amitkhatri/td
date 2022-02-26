@@ -4,6 +4,7 @@
 #include <string.h>
 #include "td.h"
 void todo_init(struct td_node** head, const char* filename, int lim){
+	
 	FILE* fp;
 	char line[lim];
 
@@ -19,7 +20,9 @@ void todo_init(struct td_node** head, const char* filename, int lim){
 }	
 
 void todo_add(struct td_node** head, char* str){
+
 	struct td_node *new_node = malloc(sizeof(struct td_node));
+	
 	new_node -> data = malloc(strlen(str)+1);
 	strcpy(new_node->data,str);
 	new_node -> next = NULL;
@@ -39,7 +42,60 @@ void todo_add(struct td_node** head, char* str){
 	return;		
 }
 
-void print_todo(struct td_node** head){
+void todo_delete(struct td_node** head, int entry){
+	int i = 1;
+	struct td_node* temp = *head;
+	struct td_node* prev;
+
+	if(entry == 1){
+		*head = temp -> next;
+		free(temp);
+		return;
+	}
+
+	while(temp != NULL && i != entry){
+		prev = temp;
+		temp = temp -> next;
+		++i;
+	}
+
+	if(temp == NULL){
+		return;
+	}
+
+	prev -> next = temp -> next;
+	
+	free(temp);
+
+	return;
+
+}
+
+void todo_write(struct td_node** head, const char* filename){
+	FILE *fp;
+	struct td_node* cursor = *head;
+
+	fp = fopen(filename,"w+");
+
+	while(cursor != NULL){
+		fputs(cursor->data,fp);
+		fputs("\n",fp);
+		cursor = cursor -> next;
+	}
+
+	fclose(fp);
+
+	return;
+
+}
+
+void todo_print(struct td_node** head){
+	
+	if(*head == NULL){
+		printf("No Todos.\n");
+		return;
+	}
+	
 	struct td_node* cursor = *head;
 
 	while(cursor != NULL){
