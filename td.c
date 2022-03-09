@@ -27,8 +27,9 @@ void todo_add(struct td_node **head, char *str){
 	strcpy(new_node->data,str);
 	new_node -> next = NULL;
 
-	if(*head == NULL)
+	if(*head == NULL){
 		*head = new_node;
+	}
 	else{
 		
 		struct td_node *cursor = *head;
@@ -65,7 +66,7 @@ void todo_delete(struct td_node **head, int entry){
 	}
 
 	prev -> next = temp -> next;
-	
+
 	free(temp);
 
 	return;
@@ -91,7 +92,8 @@ void todo_write(struct td_node **head, const char *filename){
 }
 
 void todo_print(struct td_node **head){
-	
+	int id = 1;
+
 	if(*head == NULL){
 		printf("No Todos.\n");
 		return;
@@ -99,9 +101,14 @@ void todo_print(struct td_node **head){
 	
 	struct td_node *cursor = *head;
 
+	printf("ID         TASK\n");
+	printf("--   -----------------\n");
+
 	while(cursor != NULL){
-		printf("%s\n",cursor -> data);
+		printf("%d    ",id);
+		printf("%-20s\n",cursor -> data);
 		cursor = cursor -> next;
+		++id;
 	}
 }
 
