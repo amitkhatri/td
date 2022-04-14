@@ -91,26 +91,6 @@ void todo_write(struct td_node **head, const char *filename){
 
 }
 
-void todo_print(struct td_node **head){
-	int id = 1;
-
-	if(*head == NULL){
-		printf("No Todos.\n");
-		return;
-	}
-	
-	struct td_node *cursor = *head;
-
-	printf("ID         TASK\n");
-	printf("--   -----------------\n");
-
-	while(cursor != NULL){
-		printf("%d    ",id);
-		printf("%-20s\n",cursor -> data);
-		cursor = cursor -> next;
-		++id;
-	}
-}
 
 void todo_free(struct td_node *head){
 	while(head != NULL){
@@ -119,4 +99,52 @@ void todo_free(struct td_node *head){
 		free(temp -> data);
 		free(temp);
 	}
+}
+
+void todo_print(struct td_node **head){
+	int id = 1;
+	int longest_entry,i;
+
+	if(*head == NULL){
+		printf("No Todos.\n");
+		return;
+	}
+	
+	longest_entry = todo_longest(head);
+
+	printf("ID   TASK\n");
+	printf("--   ");
+
+	for(i = 0; i < longest_entry; ++i){
+		printf("-");
+	}
+
+	printf("\n");
+	
+	struct td_node *cursor = *head;
+	
+	while(cursor != NULL){
+		printf("%d    ",id);
+		printf("%-20s\n",cursor -> data);
+		cursor = cursor -> next;
+		++id;
+	}
+
+	
+
+}
+
+int todo_longest(struct td_node **head){
+	int longest = 0;
+	struct td_node *cursor = *head;
+
+	while(cursor != NULL){
+		if((strlen(cursor -> data)) > longest){
+			longest = strlen(cursor -> data);
+		}
+
+		cursor = cursor -> next;
+	}
+
+	return longest;
 }
