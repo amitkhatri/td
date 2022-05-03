@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include "td.h"
+#include "helper.h"
 
 #define FILENAME ".todo"
 #define MAX_LINE_LENGTH 50
@@ -14,6 +15,7 @@ int main(int argc, char* argv[]){
 	int option;
 	struct td_node *td = NULL;
 	char **ptr;
+	char *td_string;
 
 	todo_init(&td,FILENAME,MAX_LINE_LENGTH);
 
@@ -24,6 +26,8 @@ int main(int argc, char* argv[]){
 		while((option = getopt(argc,argv,"ad")) != -1){
 			switch(option){
 				case 'a':
+				//	td_string = concatenate_args(argv,argc,MAX_LINE_LENGTH);
+				//	printf("The todo string is: %s\n",td_string);
 					todo_add(&td,argv[2]);
 					break;
 				case 'd':
