@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-void concatenate_args(char *argv[], int arg_count, char *output, int max_length){
+void concatenate_args(char *argv[], int arg_count, char *output){
 	int i = 2;
 
 	while(i < arg_count){

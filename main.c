@@ -26,7 +26,7 @@ int main(int argc, char* argv[]){
 		while((option = getopt(argc,argv,"ad")) != -1){
 			switch(option){
 				case 'a':
-					concatenate_args(argv,argc,td_string,MAX_LINE_LENGTH);
+					concatenate_args(argv,argc,td_string);
 					todo_add(&td,td_string);
 					break;
 				case 'd':
